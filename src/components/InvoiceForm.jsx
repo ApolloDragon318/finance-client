@@ -37,12 +37,12 @@ export default function InvoiceForm({ projectId, percentage, ownerIsAdmin, onSav
 				<input type="number" step="0.01" className="input" value={amount} onChange={e => setAmount(e.target.value)} required placeholder="e.g. 500 or -100" />
 			</div>
 			<div>
-				<label className="label">Income Date</label>
-				<input type="date" className="input" value={incomeDate} onChange={e => setIncomeDate(e.target.value)} required />
-			</div>
-			<div>
 				<label className="label">Reason</label>
 				<input type="text" className="input" value={reason} onChange={e => setReason(e.target.value)} placeholder="e.g. Client payment, Office supplies" />
+			</div>
+			<div>
+				<label className="label">Income Date</label>
+				<input type="date" className="input" value={incomeDate} onChange={e => setIncomeDate(e.target.value)} required />
 			</div>
 			<div className="flex justify-end">
 				<button className="btn-primary" type="submit">{saving ? 'Saving...' : 'Create Invoice'}</button>
