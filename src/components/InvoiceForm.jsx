@@ -32,8 +32,8 @@ export default function InvoiceForm({ projectId, percentage, ownerIsAdmin, onSav
 			</div>
 			{/* Member selection removed; user share goes to owner */}
 			<div>
-				<label className="label">Amount</label>
-				<input type="number" min="0" step="0.01" className="input" value={amount} onChange={e => setAmount(e.target.value)} required />
+				<label className="label">Amount (positive = income, negative = expense)</label>
+				<input type="number" step="0.01" className="input" value={amount} onChange={e => setAmount(e.target.value)} required placeholder="e.g. 500 or -100" />
 			</div>
 			<div>
 				<label className="label">Income Date</label>

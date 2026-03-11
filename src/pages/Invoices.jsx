@@ -70,7 +70,9 @@ export default function Invoices() {
 							<tr key={inv._id} className="border-t">
 								<td className="px-4 py-3">{inv.projectId?.idName} - {inv.projectId?.fullName}</td>
 								<td className="px-4 py-3">{inv.percentage}%</td>
-								<td className="px-4 py-3">${Number(inv.amount).toLocaleString()}</td>
+								<td className={`px-4 py-3 ${Number(inv.amount) < 0 ? 'text-red-600' : ''}`}>
+									{Number(inv.amount) < 0 ? `($${Math.abs(Number(inv.amount)).toLocaleString()})` : `$${Number(inv.amount).toLocaleString()}`}
+								</td>
 								<td className="px-4 py-3">{new Date(inv.incomeDate).toISOString().slice(0, 10)}</td>
 							</tr>
 						))}
