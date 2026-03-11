@@ -58,6 +58,7 @@ export default function Invoices() {
 							<th className="text-left px-4 py-3 font-semibold">Project</th>
 							<th className="text-left px-4 py-3 font-semibold">Pct</th>
 							<th className="text-left px-4 py-3 font-semibold">Amount</th>
+							<th className="text-left px-4 py-3 font-semibold">Reason</th>
 							<th className="text-left px-4 py-3 font-semibold">Income Date</th>
 						</tr>
 					</thead>
@@ -65,7 +66,8 @@ export default function Invoices() {
 						{invoices.filter(inv => {
 							const term = q.toLowerCase()
 							const proj = `${inv.projectId?.idName} ${inv.projectId?.fullName}`.toLowerCase()
-							return proj.includes(term)
+							const reason = (inv.reason || '').toLowerCase()
+							return proj.includes(term) || reason.includes(term)
 						}).map(inv => (
 							<tr key={inv._id} className="border-t">
 								<td className="px-4 py-3">{inv.projectId?.idName} - {inv.projectId?.fullName}</td>
@@ -73,6 +75,7 @@ export default function Invoices() {
 								<td className={`px-4 py-3 ${Number(inv.amount) < 0 ? 'text-red-600' : ''}`}>
 									{Number(inv.amount) < 0 ? `($${Math.abs(Number(inv.amount)).toLocaleString()})` : `$${Number(inv.amount).toLocaleString()}`}
 								</td>
+								<td className="px-4 py-3">{inv.reason || '—'}</td>
 								<td className="px-4 py-3">{new Date(inv.incomeDate).toISOString().slice(0, 10)}</td>
 							</tr>
 						))}

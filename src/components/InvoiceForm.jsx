@@ -4,6 +4,7 @@ import api from '../api/axios'
 export default function InvoiceForm({ projectId, percentage, ownerIsAdmin, onSaved }) {
 	const [amount, setAmount] = useState('')
 	const [incomeDate, setIncomeDate] = useState('')
+	const [reason, setReason] = useState('')
 	const [saving, setSaving] = useState(false)
 	const [snapshotPct, setSnapshotPct] = useState(percentage ?? 0)
 
@@ -17,7 +18,7 @@ export default function InvoiceForm({ projectId, percentage, ownerIsAdmin, onSav
 		e.preventDefault()
 		setSaving(true)
 		try {
-			await api.post('/invoices', { projectId, amount: Number(amount), incomeDate })
+			await api.post('/invoices', { projectId, amount: Number(amount), incomeDate, reason: reason.trim() })
 			onSaved()
 		} finally {
 			setSaving(false)
@@ -38,6 +39,10 @@ export default function InvoiceForm({ projectId, percentage, ownerIsAdmin, onSav
 			<div>
 				<label className="label">Income Date</label>
 				<input type="date" className="input" value={incomeDate} onChange={e => setIncomeDate(e.target.value)} required />
+			</div>
+			<div>
+				<label className="label">Reason</label>
+				<input type="text" className="input" value={reason} onChange={e => setReason(e.target.value)} placeholder="e.g. Client payment, Office supplies" />
 			</div>
 			<div className="flex justify-end">
 				<button className="btn-primary" type="submit">{saving ? 'Saving...' : 'Create Invoice'}</button>
